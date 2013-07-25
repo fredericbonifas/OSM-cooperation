@@ -17,6 +17,8 @@
   <style>
 
     body {
+            width: 1280px;
+
       font-family: 'Cabin', sans-serif;
     }
 
@@ -49,16 +51,16 @@
   </style>
 </head>
 <body>
-  Mapping international cooperation in <a href="http://www.openstreetmap.org">OpenStreetMap</a>
+  <h1>Mapping international cooperation in <a href="http://www.openstreetmap.org">OpenStreetMap</a></h1>
   <div id="map"></div>
+  <br />All nodes in the OSM Planet from the 15th June 2013 have been analyzed. For each contributors, the nodes they have contributed in every countries have been counted. Each contributor has been assigned a main country of contribution. All this data has then been merged together to know, for each country, where people mainly contributing in this country have been mapping elsewhere.
 
   <script src="http://cdn.leafletjs.com/leaflet-0.6.3/leaflet.js"></script>
-
   <script type="text/javascript" src="worldcountries.geojson"></script>
   <script type="text/javascript" src="connections.js"></script>
   <script type="text/javascript">
 
-    var osmAttrib='Data from <a href="http://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>, analyzed by <a href="mailto:fredericbonifas@gmail.com">Frédéric Bonifas</a> at <a href="http://www.makina-corpus.com">Makina Corpus</a>';
+    var osmAttrib='Data from <a href="http://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>, countries from <a href="http://www.naturalearthdata.com/">Natural Earth</a>, analyzed by <a href="mailto:fredericbonifas@gmail.com">Frédéric Bonifas</a> at <a href="http://www.makina-corpus.com">Makina Corpus</a>';
 
     var map = L.map('map').setView([0, 0], 2);
     // Don't show the 'Powered by Leaflet' text 
