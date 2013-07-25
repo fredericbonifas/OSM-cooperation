@@ -25,7 +25,6 @@
       background: white;
       background: rgba(255,255,255,0.8);
       box-shadow: 0 0 15px rgba(0,0,0,0.2);
-      border-radius: 5px;
     }
     .info h4 {
       margin: 0 0 5px;
@@ -42,7 +41,7 @@
       height: 18px;
       float: left;
       margin-right: 8px;
-      opacity: 0.7;
+      opacity: 1;
     }
   </style>
 </head>
@@ -55,8 +54,11 @@
   <script type="text/javascript" src="connections.js"></script>
   <script type="text/javascript">
 
-    var map = L.map('map').setView([0, 0], 2);
+    var osmAttrib='Data from <a href="http://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>, analyzed by <a href="mailto:fredericbonifas@gmail.com">Frédéric Bonifas</a> at <a href="http://www.makina-corpus.com">Makina Corpus</a>';
 
+    var map = L.map('map').setView([0, 0], 2);
+    // Don't show the 'Powered by Leaflet' text 
+    map.attributionControl.setPrefix('');
 
     var countriesStyle = {
       color: "grey",
@@ -115,6 +117,27 @@
       style: countriesStyle,
       onEachFeature: onEachFeature
     }).addTo(map);
+
+    var legend = L.control({position: 'bottomright'});
+
+    legend.onAdd = function (map) {
+
+        var div = L.DomUtil.create('div', 'info legend'),
+            grades = [1, 100, 1000, 10000, 100000, 1000000],
+            labels = [];
+
+        // loop through our density intervals and generate a label with a colored square for each interval
+        div.innerHTML += 'Nodes contributed in other <br />countries by people mainly <br />mapping in the selected country<br />';
+        for (var i = 0; i < grades.length; i++) {
+            div.innerHTML +=
+                '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+                grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+        }
+
+        return div;
+    };
+
+    legend.addTo(map);
 
 
   </script>
